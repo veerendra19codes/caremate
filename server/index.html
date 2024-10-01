@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Payment - Choose Your Care Plan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styles can go here */
+        .bg-custom {
+            background-color: #f3f4f6;
+            /* Light gray */
+        }
+    </style>
+</head>
+
+<body class="bg-custom">
+    <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-5xl font-bold text-center mb-12 text-gray-800">Choose Your Care Plan</h1>
+            <p class="text-2xl text-center mb-12 text-gray-600">Select the plan that best suits your needs. Our friendly
+                team is here to help you every step of the way.</p>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-white p-8 rounded-lg shadow-md border-4 border-blue-500">
+                    <h2 class="text-3xl font-bold mb-6 text-blue-700">Basic Plan (Free)</h2>
+                    <p class="text-xl mb-6">Enjoy our services at no cost. Perfect for getting started and staying
+                        connected.</p>
+                    <ul class="text-lg space-y-4 mb-6">
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Video calls with family (up to 30 minutes)
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Medication reminders
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Basic health tips
+                        </li>
+                    </ul>
+                    <button
+                        class="w-full bg-blue-500 text-white text-xl px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors focus:outline-none focus:ring-4 focus:ring-blue-300"
+                        onclick="showPaymentModal('Free Plan')">
+                        Continue in app
+                    </button>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-md border-4 border-green-500">
+                    <h2 class="text-3xl font-bold mb-6 text-green-700">Premium Plan</h2>
+                    <p class="text-xl mb-6">Get full access to all our features for a worry-free experience.</p>
+                    <ul class="text-lg space-y-4 mb-6">
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Unlimited video calls with family
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            24/7 emergency assistance button
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Personalized health and wellness plans
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-green-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Video call with top- quality doctors, health professionals, etc
+                        </li>
+                    </ul>
+                    <p class="text-xl mb-6">Price: $29.99 per month</p>
+                    <button
+                        class="w-full bg-green-500 text-white text-xl px-6 py-3 rounded-lg hover:bg-green-600 transition-colors focus:outline-none focus:ring-4 focus:ring-green-300"
+                        onclick="showPaymentModal('Premium Plan')">
+                        Pay for premium
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        function showPaymentModal(plan) {
+            const amount = plan === 'Premium Plan' ? 2999 : 0; // Amount in paise (0 for Free Plan)
+            const options = {
+                key: 'rzp_test_YP2h2V2FNVLMiR', // Replace with your Razorpay key_id
+                amount: amount, // Amount is in currency subunits (i.e., paise)
+                currency: 'INR',
+                name: 'Acme Corp',
+                description: plan,
+                callback_url: 'http://localhost:3000/payment-success', // Your success URL
+                prefill: {
+                    name: 'Gaurav Kumar',
+                    email: 'gaurav.kumar@example.com',
+                    contact: '9999999999'
+                },
+                theme: {
+                    color: '#F37254'
+                },
+                handler: function (response) {
+                    fetch('/verify-payment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature
+                        })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.status === 'ok') {
+                                window.location.href = '/payment-success';
+                            } else {
+                                alert('Payment verification failed');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error verifying payment');
+                        });
+                }
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        }
+    </script>
+</body>
+
+</html>

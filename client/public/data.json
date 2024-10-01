@@ -1,0 +1,514 @@
+{
+    "paneer": {
+      "quantity": "50g",
+      "protein": 9,
+      "carbs": 3.5,
+      "fats": 9.5,
+      "calories": 130
+    },
+    "bhindi": {
+      "quantity": "100g",
+      "protein": 1.6,
+      "carbs": 7.0,
+      "fats": 0.2,
+      "calories": 33
+    },
+    "kadi": {
+      "quantity": "200g",
+      "protein": 6,
+      "carbs": 17,
+      "fats": 9,
+      "calories": 176
+    },
+    "dal_tadka": {
+      "quantity": "150g",
+      "protein": 8,
+      "carbs": 20,
+      "fats": 6,
+      "calories": 180
+    },
+    "lassi": {
+      "quantity": "200ml",
+      "protein": 7.5,
+      "carbs": 15,
+      "fats": 8,
+      "calories": 160
+    },
+    "chicken_curry": {
+      "quantity": "150g",
+      "protein": 22,
+      "carbs": 4,
+      "fats": 8,
+      "calories": 220
+    },
+    "roti": {
+      "quantity": "1 piece",
+      "protein": 3,
+      "carbs": 15,
+      "fats": 1.5,
+      "calories": 80
+    },
+    "poha": {
+      "quantity": "100g",
+      "protein": 5,
+      "carbs": 25,
+      "fats": 4,
+      "calories": 150
+    },
+    "idli": {
+      "quantity": "1 piece",
+      "protein": 2,
+      "carbs": 12,
+      "fats": 0.5,
+      "calories": 58
+    },
+    "dosa": {
+      "quantity": "1 piece",
+      "protein": 4,
+      "carbs": 35,
+      "fats": 4,
+      "calories": 168
+    },
+    "sambar": {
+      "quantity": "100g",
+      "protein": 2.5,
+      "carbs": 9,
+      "fats": 1.5,
+      "calories": 55
+    },
+    "paratha": {
+      "quantity": "1 piece",
+      "protein": 5,
+      "carbs": 28,
+      "fats": 7,
+      "calories": 190
+    },
+    "biryani_veg": {
+      "quantity": "200g",
+      "protein": 6,
+      "carbs": 35,
+      "fats": 9,
+      "calories": 230
+    },
+    "biryani_chicken": {
+      "quantity": "200g",
+      "protein": 20,
+      "carbs": 32,
+      "fats": 12,
+      "calories": 290
+    },
+    "rajma": {
+      "quantity": "150g",
+      "protein": 9,
+      "carbs": 26,
+      "fats": 2,
+      "calories": 150
+    },
+    "chole": {
+      "quantity": "150g",
+      "protein": 9,
+      "carbs": 28,
+      "fats": 3,
+      "calories": 180
+    },
+    "pulao": {
+      "quantity": "200g",
+      "protein": 5,
+      "carbs": 38,
+      "fats": 8,
+      "calories": 210
+    },
+    "gajar_halwa": {
+      "quantity": "100g",
+      "protein": 4,
+      "carbs": 30,
+      "fats": 12,
+      "calories": 210
+    },
+    "pav_bhaji": {
+      "quantity": "250g",
+      "protein": 9,
+      "carbs": 45,
+      "fats": 14,
+      "calories": 360
+    },
+    "aloo_paratha": {
+      "quantity": "1 piece",
+      "protein": 4,
+      "carbs": 29,
+      "fats": 7,
+      "calories": 190
+    },
+    "fish_curry": {
+      "quantity": "150g",
+      "protein": 18,
+      "carbs": 6,
+      "fats": 10,
+      "calories": 210
+    },
+    "mutton_curry": {
+      "quantity": "150g",
+      "protein": 25,
+      "carbs": 5,
+      "fats": 16,
+      "calories": 270
+    },
+    "puri": {
+      "quantity": "1 piece",
+      "protein": 1,
+      "carbs": 9,
+      "fats": 3,
+      "calories": 60
+    },
+    "sabudana_khichdi": {
+      "quantity": "200g",
+      "protein": 3,
+      "carbs": 35,
+      "fats": 10,
+      "calories": 240
+    },
+    "upma": {
+      "quantity": "150g",
+      "protein": 6,
+      "carbs": 28,
+      "fats": 5,
+      "calories": 180
+    },
+    "vada": {
+      "quantity": "1 piece",
+      "protein": 2.5,
+      "carbs": 18,
+      "fats": 6,
+      "calories": 150
+    },
+    "pani_puri": {
+      "quantity": "1 plate",
+      "protein": 3,
+      "carbs": 40,
+      "fats": 5,
+      "calories": 210
+    },
+    "kheer": {
+      "quantity": "100g",
+      "protein": 4,
+      "carbs": 25,
+      "fats": 8,
+      "calories": 180
+    },
+    "dahi": {
+      "quantity": "100g",
+      "protein": 3.5,
+      "carbs": 4,
+      "fats": 3,
+      "calories": 60
+    },
+    "butter_chicken": {
+      "quantity": "150g",
+      "protein": 22,
+      "carbs": 10,
+      "fats": 16,
+      "calories": 310
+    },
+    "makki_di_roti": {
+      "quantity": "1 piece",
+      "protein": 5,
+      "carbs": 22,
+      "fats": 2.5,
+      "calories": 110
+    },
+    "sarson_da_saag": {
+      "quantity": "150g",
+      "protein": 4,
+      "carbs": 10,
+      "fats": 7,
+      "calories": 120
+    },
+    "idiyappam": {
+      "quantity": "1 piece",
+      "protein": 2,
+      "carbs": 22,
+      "fats": 0.5,
+      "calories": 100
+    },
+    "prawn_curry": {
+      "quantity": "150g",
+      "protein": 22,
+      "carbs": 6,
+      "fats": 9,
+      "calories": 210
+    },
+    "vada_pav": {
+      "quantity": "1 piece",
+      "protein": 4,
+      "carbs": 40,
+      "fats": 12,
+      "calories": 300
+    },
+    "jalebi": {
+      "quantity": "50g",
+      "protein": 0.5,
+      "carbs": 33,
+      "fats": 7,
+      "calories": 170
+    },
+    "khichdi": {
+      "quantity": "200g",
+      "protein": 8,
+      "carbs": 35,
+      "fats": 5,
+      "calories": 210
+    },
+    "aloo_gobi": {
+      "quantity": "150g",
+      "protein": 3,
+      "carbs": 12,
+      "fats": 7,
+      "calories": 140
+    },
+    "keema": {
+      "quantity": "150g",
+      "protein": 23,
+      "carbs": 5,
+      "fats": 18,
+      "calories": 290
+    },
+    "chapati": {
+      "quantity": "1 piece",
+      "protein": 3,
+      "carbs": 15,
+      "fats": 1.5,
+      "calories": 80
+    },
+    "bajra_roti": {
+      "quantity": "1 piece",
+      "protein": 3,
+      "carbs": 17,
+      "fats": 1.5,
+      "calories": 90
+    },
+    "choorma": {
+        "quantity": "100g",
+        "protein": 5,
+        "carbs": 56,
+        "fats": 8,
+        "calories": 310
+      },
+      "palak_paneer": {
+        "quantity": "150g",
+        "protein": 11,
+        "carbs": 10,
+        "fats": 12,
+        "calories": 200
+      },
+      "aloo_puri": {
+        "quantity": "1 plate",
+        "protein": 6,
+        "carbs": 45,
+        "fats": 18,
+        "calories": 360
+      },
+      "paneer_tikka": {
+        "quantity": "150g",
+        "protein": 14,
+        "carbs": 8,
+        "fats": 14,
+        "calories": 220
+      },
+      "bhel_puri": {
+        "quantity": "1 plate",
+        "protein": 4,
+        "carbs": 40,
+        "fats": 10,
+        "calories": 220
+      },
+      "dhokla": {
+        "quantity": "100g",
+        "protein": 5,
+        "carbs": 19,
+        "fats": 1,
+        "calories": 97
+      },
+      "rava_dosa": {
+        "quantity": "1 piece",
+        "protein": 4,
+        "carbs": 22,
+        "fats": 4,
+        "calories": 120
+      },
+      "poori_bhaji": {
+        "quantity": "1 plate",
+        "protein": 7,
+        "carbs": 40,
+        "fats": 15,
+        "calories": 310
+      },
+      "seviyan_kheer": {
+        "quantity": "150g",
+        "protein": 6,
+        "carbs": 34,
+        "fats": 9,
+        "calories": 210
+      },
+      "malai_kofta": {
+        "quantity": "150g",
+        "protein": 9,
+        "carbs": 15,
+        "fats": 16,
+        "calories": 260
+      },
+      "korma_chicken": {
+        "quantity": "150g",
+        "protein": 20,
+        "carbs": 6,
+        "fats": 14,
+        "calories": 250
+      },
+      "aloo_tikki": {
+        "quantity": "2 pieces",
+        "protein": 4,
+        "carbs": 36,
+        "fats": 14,
+        "calories": 280
+      },
+      "prawn_biryani": {
+        "quantity": "200g",
+        "protein": 18,
+        "carbs": 36,
+        "fats": 10,
+        "calories": 280
+      },
+      "veg_korma": {
+        "quantity": "150g",
+        "protein": 5,
+        "carbs": 15,
+        "fats": 12,
+        "calories": 180
+      },
+      "stuffed_paratha": {
+        "quantity": "1 piece",
+        "protein": 5,
+        "carbs": 30,
+        "fats": 8,
+        "calories": 200
+      },
+      "jal-jeera": {
+        "quantity": "200ml",
+        "protein": 0.5,
+        "carbs": 8,
+        "fats": 0.5,
+        "calories": 35
+      },
+      "kathi_roll": {
+        "quantity": "1 roll",
+        "protein": 10,
+        "carbs": 40,
+        "fats": 15,
+        "calories": 300
+      },
+      "bonda": {
+        "quantity": "1 piece",
+        "protein": 3,
+        "carbs": 20,
+        "fats": 8,
+        "calories": 160
+      },
+      "modak": {
+        "quantity": "1 piece",
+        "protein": 1,
+        "carbs": 12,
+        "fats": 3,
+        "calories": 80
+      },
+      "thepla": {
+        "quantity": "1 piece",
+        "protein": 3,
+        "carbs": 18,
+        "fats": 4,
+        "calories": 120
+      },
+      "methi_malai_mutter": {
+        "quantity": "150g",
+        "protein": 8,
+        "carbs": 12,
+        "fats": 10,
+        "calories": 180
+      },
+      "gobi_manchurian": {
+        "quantity": "150g",
+        "protein": 5,
+        "carbs": 22,
+        "fats": 9,
+        "calories": 170
+      },
+      "rasgulla": {
+        "quantity": "1 piece",
+        "protein": 1.5,
+        "carbs": 20,
+        "fats": 0.5,
+        "calories": 100
+      },
+      "gulab_jamun": {
+        "quantity": "1 piece",
+        "protein": 1,
+        "carbs": 25,
+        "fats": 4,
+        "calories": 150
+      },
+      "kachori": {
+        "quantity": "1 piece",
+        "protein": 4,
+        "carbs": 28,
+        "fats": 12,
+        "calories": 240
+      },
+      "basundi": {
+        "quantity": "100ml",
+        "protein": 4,
+        "carbs": 28,
+        "fats": 12,
+        "calories": 190
+      },
+      "moong_dal_cheela": {
+        "quantity": "1 piece",
+        "protein": 6,
+        "carbs": 16,
+        "fats": 4,
+        "calories": 120
+      },
+      "veg_cutlet": {
+        "quantity": "2 pieces",
+        "protein": 6,
+        "carbs": 28,
+        "fats": 8,
+        "calories": 220
+      },
+      "shrikhand": {
+        "quantity": "100g",
+        "protein": 5,
+        "carbs": 28,
+        "fats": 10,
+        "calories": 210
+      },
+      "prawn_fry": {
+        "quantity": "150g",
+        "protein": 20,
+        "carbs": 5,
+        "fats": 12,
+        "calories": 190
+      },
+      "bhatura": {
+        "quantity": "1 piece",
+        "protein": 5,
+        "carbs": 25,
+        "fats": 8,
+        "calories": 190
+      },
+      "murg_makhani": {
+        "quantity": "150g",
+        "protein": 22,
+        "carbs": 10,
+        "fats": 18,
+        "calories": 320
+      }
+    }
+    
