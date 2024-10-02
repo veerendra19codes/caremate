@@ -1,10 +1,9 @@
-const {v2} = require("../cloudinary");
 const moment = require("moment");
 const fs = require("fs");
 
 const userProfilePostController = async (req, res) => {
    const { name } = req.body;
-    const uploadResult = await v2.uploader.upload(req.file.path);
+    // const uploadResult = await v2.uploader.upload(req.file.path);
     // console.log("file name:", req.file.filename);
     fs.unlinkSync(`${req.file.path}`);
 
