@@ -30,12 +30,10 @@ const taskSchema = new mongoose.Schema({
 }, { timestamps: true }); 
 
 const userSchema = new mongoose.Schema({
-   
-    email: {
+    username: {
         type: String,
-        // required: true,
-        trim: true,
-        lowercase: true,
+        required: true,
+        unique: true,
     },
     password: {
         type: String,
@@ -51,14 +49,6 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true,
         unique: true,
-    },
-    firstName: {
-        type: String,
-        required: true,
-    },
-    surname: {
-        type: String,
-        required: true,
     },
     age: {
         type: Number
@@ -79,9 +69,9 @@ const userSchema = new mongoose.Schema({
     lon: {
         type: Number
     },
-     profileImageUrl: {
+    profileImageUrl: {
         type: String
-     }
+    }
 }, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);

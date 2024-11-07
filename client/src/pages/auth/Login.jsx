@@ -43,14 +43,15 @@ const Login = () => {
     }, [navigate]);
 
     return (
-        <div className='w-full min-h-screen flex justify-center items-center bg-gray-400'>
-            <form className='bg-gray-200 shadow-lg p-8 rounded-lg flex flex-col justify-center items-center gap-4 w-[400px] h-[500px]' onSubmit={handleSubmit}>
-                <h1 className='text-2xl font-bold text-black'>Login</h1>
+        <div className='w-full min-h-screen flex justify-center items-center bg-gray-200'>
+            <form className='bg-gray-100 shadow-lg p-8 rounded-lg flex flex-col justify-center items-center gap-4 w-[400px] h-[500px]' onSubmit={handleSubmit}>
+                <h1 className='text-4xl font-bold text-black'>Login</h1>
+                <h4 className=' text-gray-500'>Enter your details to login</h4>
 
                 <div className="inputfield flex flex-col w-full">
-                    <label className='text-black'>Phone Number</label>
+                    <label className='text-black'>Username or Phone Number</label>
 
-                    <input type="text" placeholder='phone number' name='phoneNumber' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} className='outline-none bg-transparent border-[1px] border-gray-600 rounded-lg p-2 text-black' />
+                    <input type="text" placeholder='username or phone number' name='phoneNumber' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} className='outline-none bg-transparent border-[1px] border-gray-600 rounded-lg p-2 text-black' />
                 </div>
 
                 <div className="inputfield flex flex-col w-full ">

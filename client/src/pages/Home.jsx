@@ -54,34 +54,62 @@ export default function HomePage() {
 
             <main className="flex-grow">
                 {/* Hero Section */}
-                <div className="relative h-[70vh]">
-                    <img
-                        src="/hero.jpg"
-                        alt="Elder care background"
-
-                        className="z-0 object-fill w-full bg-blend-darken"
-                    />
-                </div>
+                <section className="w-full py-12 md:py-24 lg:py-32 xl:py-24 bg-gray-100">
+                    <div className="container mx-auto px-4 md:px-6">
+                        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
+                            <div className="flex flex-col justify-center space-y-4">
+                                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl text-gray-900">
+                                    Ensuring Safety and Peace of Mind for <br></br>
+                                    <span className="text-pink-600">Your Loved Ones</span>
+                                </h1>
+                                <p className="max-w-[600px] text-gray-600 md:text-xl">
+                                    Innovative solutions to keep seniors safe, independent, and connected in their homes.
+                                </p>
+                                <div className="flex flex-col gap-2 sm:flex-row">
+                                    <Link href="#" className="inline-flex h-12 items-center justify-center rounded-md bg-blue-600 px-6 font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">
+                                        Get Started
+                                    </Link>
+                                    <Link href="#" className="inline-flex h-12 items-center justify-center rounded-md border border-gray-300 bg-white px-6 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">
+                                        Learn More
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="flex items-center justify-center">
+                                <img
+                                    src="/hero.jpg"
+                                    alt="Elderly couple using a safety device"
+                                    width={550}
+                                    height={550}
+                                    className="rounded-xl object-cover"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
                 {/* Services Blocks */}
                 <div className="container mx-auto py-20 px-4">
                     <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Our Comprehensive Elder Care Services</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {services.map((service, index) => (
-                            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 hover:shadow-xl transform hover:-translate-y-1">
-                                <div className="pt-6 pb-3 px-3">
-                                    <div className="flex items-center mb-4">
-                                        <service.icon className="w-8 h-8 text-blue-600 mr-3" />
-                                        <h3 className="text-xl font-semibold">{service.title}</h3>
-                                    </div>
-                                    <p className="text-gray-600 mb-4">{service.description}</p>
+                            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 hover:shadow-xl transform hover:-translate-y-1 min-h-[400px] ">
+                                <div className="pt-6 pb-3 px-3 flex flex-col justify-between h-full">
                                     <img
                                         src={service.image}
                                         alt={service.title}
                                         width={120}
-                                        height={120}
-                                        className="rounded-lg w-full h-32 object-cover"
+                                        height={300}
+                                        className="rounded-lg w-full object-cover"
                                     />
+                                    <div>
+
+                                        <div className="flex items-center mb-4">
+                                            <service.icon className="w-8 h-8 text-blue-600 mr-3" />
+                                            <h3 className="text-xl font-semibold">{service.title}</h3>
+                                        </div>
+                                        <p className="text-gray-600 mb-4">{service.description}</p>
+
+                                    </div>
                                 </div>
                             </div>
                         ))}

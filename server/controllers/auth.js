@@ -13,7 +13,7 @@ const jwt = require("jsonwebtoken");
 // })
 
 const registerController = async(req, res) => {
-    const {firstName, surname, phoneNumber, password, confirmPassword, role } = await req.body;
+    const {username, phoneNumber, password,  role } = await req.body;
 
     try {
         // //zod validation
@@ -26,14 +26,14 @@ const registerController = async(req, res) => {
 
         // check if password and confirmPasswords match
 
-        if(password != confirmPassword) {
-            console.log("passwords donot match");
-            return res.status(411).json({message: "passwords do not match"})
-        }
-
         // check if user already exists in db
 
-        const exists = await User.findOne({ phoneNumber });
+        const exists = await User.findOne({
+            $or: [
+                { username },
+                { phoneNumber }
+            ]
+        });
 
         if(exists) {
             console.log("exists: ", exists);
@@ -46,8 +46,7 @@ const registerController = async(req, res) => {
         console.log("hashedPassword: ", hashedPassword);
 
         const newUser = await User.create({
-            firstName,
-            surname,
+            username,
             phoneNumber,
             password:hashedPassword,
             role
@@ -74,36 +73,75 @@ const registerController = async(req, res) => {
 const loginController = async(req, res) => {
     const { phoneNumber, password } = await req.body;
 
+    let  checkNan = parseInt(phoneNumber);
+
+    //  phoneNumber is actually a username
+    if(isNaN(checkNan)) {
     try {
-        //zod validation
-        // const { success } = loginBody.safeParse(req.body);
+            //zod validation
+            // const { success } = loginBody.safeParse(req.body);
 
-        // if(!success) {
-        //     console.log("invalid inputs");
-        //     return res.status(411).json({message: "Invalid inputs"})
-        // }
+            // if(!success) {
+            //     console.log("invalid inputs");
+            //     return res.status(411).json({message: "Invalid inputs"})
+            // }
 
-        // check if user already exists in db
+            // check if user already exists in db
 
-        const exists = await User.findOne({ phoneNumber });
+            const exists = await User.findOne({ username: phoneNumber });
 
-        if(!exists) {
-            console.log("exists: ", exists);
-            return res.status(411).json({message: "User does not already exists"})
-        }
+            if(!exists) {
+                console.log("exists: ", exists);
+                return res.status(411).json({message: "User does not already exists"})
+            }
 
-        //return token
+            //return token
 
-        const token = await jwt.sign( {userId: exists._id }, process.env.JWT_SECRET);
-        console.log("token: ", token);
+            const token = await jwt.sign( {userId: exists._id }, process.env.JWT_SECRET);
+            console.log("token: ", token);
 
-        return res.status(200).json({message: "User logged in successfully", token})
+            return res.status(200).json({message: "User logged in successfully", token})
 
-        // create jwt token and return it
+            // create jwt token and return it
     } catch (error) {
         console.log("error in logging in: ", error);
         return res.status(411).json({message: "Something went wrong"})
     }
+    }
+    else {
+
+        
+        try {
+            //zod validation
+            // const { success } = loginBody.safeParse(req.body);
+            
+            // if(!success) {
+                //     console.log("invalid inputs");
+                //     return res.status(411).json({message: "Invalid inputs"})
+                // }
+                
+                // check if user already exists in db
+                
+                const exists = await User.findOne({phoneNumber:checkNan });
+                
+                if(!exists) {
+                    console.log("exists: ", exists);
+                    return res.status(411).json({message: "User does not already exists"})
+                }
+                
+                //return token
+                
+                const token = await jwt.sign( {userId: exists._id }, process.env.JWT_SECRET);
+                console.log("token: ", token);
+                
+                return res.status(200).json({message: "User logged in successfully", token})
+                
+                // create jwt token and return it
+            } catch (error) {
+                console.log("error in logging in: ", error);
+                return res.status(411).json({message: "Something went wrong"})
+            }
+        }
 }
 
 module.exports = { loginController, registerController };

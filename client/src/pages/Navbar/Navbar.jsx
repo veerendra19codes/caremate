@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const [loggedIn, setLoggedIn] = useState(true);
     const [user, setUser] = useState({});
@@ -114,7 +115,7 @@ const Navbar = () => {
                 console.log("error in getting user details: ", error);
             }
         }
-        getUserDetails();
+        if (token) getUserDetails();
     }, [])
 
     useEffect(() => {
@@ -137,8 +138,8 @@ const Navbar = () => {
                 console.log("error in getting user details: ", error);
             }
         }
-        getUserDetails();
-    }, [])
+        if (token) getUserDetails();
+    }, [navigate])
 
     return (
         <>
@@ -167,7 +168,7 @@ const Navbar = () => {
 
 
                     <div className='login/signout flex gap-4 justify-center items-center mr-8'>
-                        <div className="font-bold text-2xl">{user && user?.firstName} ( {user?.role} )</div>
+                        <div className="font-bold text-2xl">{user && user?.username} ( {user?.role} )</div>
                         {showNavbar ?
                             <a href='/login' className="px-4 py-2 rounded-lg bg-red-500 hover:bg-red-400 text-white " onClick={() => localStorage.removeItem("usertoken")}>Signout</a>
                             :

@@ -209,6 +209,10 @@ mongoose.connect(process.env.MONGO_URL)
 .then(() => console.log("connected to db"))
 .catch((err) => console.log("error in connecting to db: ", err))
 
+app.get("/", (req, res) => {
+  res.send("helo world")
+})
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {

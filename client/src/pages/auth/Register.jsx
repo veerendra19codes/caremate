@@ -7,13 +7,10 @@ import axios from "axios";
 const Register = () => {
     const navigate = useNavigate();
     const [role, setRole] = useState("client");
-    const [firstName, setFirstName] = useState("");
+    const [username, setUsername] = useState("");
     const [phoneNumber, setPhoneNumber] = useState(0);
-    const [surname, setSurname] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,10 +23,8 @@ const Register = () => {
                 url: apiUrl,
                 data: {
                     phoneNumber,
-                    firstName,
-                    surname,
+                    username,
                     password,
-                    confirmPassword,
                     role
                 }
             });
@@ -52,9 +47,10 @@ const Register = () => {
     }, [navigate]);
 
     return (
-        <div className='w-full min-h-screen flex justify-center items-center bg-gray-400'>
-            <form className='bg-gray-200 shadow-lg p-4 rounded-lg flex flex-col justify-center items-center gap-2  lg:gap-4 min-w-[250px]  lg:min-w-[400px] min-h-[500px]' onSubmit={handleSubmit}>
-                <h1 className='text-2xl font-bold text-black'>Register</h1>
+        <div className='w-full min-h-screen flex justify-center items-center bg-gray-200'>
+            <form className='bg-gray-100 shadow-lg p-12 rounded-3xl flex flex-col justify-center items-center gap-2  lg:gap-4 min-w-[250px]  lg:min-w-[400px] min-h-[500px]' onSubmit={handleSubmit}>
+                <h1 className='text-4xl font-bold text-black'>Register</h1>
+                <h4 className=' text-gray-500'>Enter your details to create an account</h4>
 
                 <div className="inputfield flex flex-col w-full">
                     <label className='text-black'>I am</label>
@@ -68,15 +64,9 @@ const Register = () => {
                 </div>
 
                 <div className="inputfield flex flex-col w-full">
-                    <label className='text-black'>First Name</label>
+                    <label className='text-black'>Username</label>
 
-                    <input placeholder='firstname' name='firstName' value={firstName} onChange={(e) => setFirstName(e.target.value)} className='outline-none bg-transparent border-[1px] border-gray-600 rounded-lg p-2 text-black' />
-                </div>
-
-                <div className="inputfield flex flex-col w-full">
-                    <label className='text-black'>Surname</label>
-
-                    <input placeholder='surname' name='surname' value={surname} onChange={(e) => setSurname(e.target.value)} className='outline-none bg-transparent border-[1px] border-gray-600 rounded-lg p-2 text-black' />
+                    <input placeholder='username' name='username' value={username} onChange={(e) => setUsername(e.target.value)} className='outline-none bg-transparent border-[1px] border-gray-600 rounded-lg p-2 text-black' />
                 </div>
 
                 <div className="inputfield flex flex-col w-full">
@@ -94,18 +84,6 @@ const Register = () => {
                             type={showPassword ? "text" : "password"} />
                         {showPassword ? <FaEyeSlash className='font-bold text-xl text-black cursor-pointer'
                             onClick={() => setShowPassword(!showPassword)} /> : <IoEyeSharp className='font-bold text-xl text-black cursor-pointer' onClick={() => setShowPassword(!showPassword)} />}
-                    </div>
-                </div>
-
-                <div className="inputfield flex flex-col w-full ">
-                    <label className='text-black'>Confirm Password</label>
-
-                    <div className='flex justify-center items-center border-[1px] border-gray-600 rounded-lg p-2'>
-                        <input placeholder='confirm password' name='confirmPassword' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
-                            className='bg-transparent outline-none text-black w-full'
-                            type={showConfirmPassword ? "text" : "password"} />
-                        {showConfirmPassword ? <FaEyeSlash className='font-bold text-xl text-black cursor-pointer'
-                            onClick={() => setShowConfirmPassword(!showConfirmPassword)} /> : <IoEyeSharp className='font-bold text-xl text-black cursor-pointer' onClick={() => setShowConfirmPassword(!showConfirmPassword)} />}
                     </div>
                 </div>
 
