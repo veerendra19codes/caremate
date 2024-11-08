@@ -28,7 +28,7 @@ export default function TodoList() {
     const fetchIncompleteTasks = async () => {
         try {
             const token = localStorage.getItem("usertoken");
-            console.log("token: ", token);
+            // console.log("token: ", token);
 
             const apiUrl = import.meta.env.VITE_BACKEND_URL;
             const response = await axios({
@@ -38,12 +38,12 @@ export default function TodoList() {
                     "Authorization": "Bearer " + token,
                 }
             });
-            console.log("response: ", response);
+            console.log("incomplete tasks: ", response);
             setIncompletetasks(response.data.tasks);
             // Update the endpoint based on your backend
             // const data = await response.json();
             // setIncompletetasks(data.tasks);
-            console.log("added through backend")
+            // console.log("added through backend")
         } catch (error) {
             console.error('Error fetching tasks:', error);
         }
@@ -53,7 +53,7 @@ export default function TodoList() {
     const fetchCompleteTasks = async () => {
         try {
             const token = localStorage.getItem("usertoken");
-            console.log("token: ", token);
+            // console.log("token: ", token);
 
             const apiUrl = import.meta.env.VITE_BACKEND_URL;
             const response = await axios({
@@ -63,12 +63,12 @@ export default function TodoList() {
                     "Authorization": "Bearer " + token,
                 }
             });
-            console.log("response: ", response);
+            // console.log("response: ", response);
             setCompletetasks(response.data.tasks);
             // Update the endpoint based on your backend
             // const data = await response.json();
             // setIncompletetasks(data.tasks);
-            console.log("added through backend")
+            // console.log("added through backend")
         } catch (error) {
             console.error('Error fetching tasks:', error);
         }
@@ -128,11 +128,10 @@ export default function TodoList() {
                 method: 'PUT',
                 data: {
                     _id: editingTask._id,
-                    name: editingTask.name,
-                    description: editingTask.description,
-                    category: editingTask.category,
-                    status: editingTask.status,
-                    deadline: convertISOToDate(editingTask.deadline),
+                    name: taskName,
+                    description: taskDescription,
+                    category: taskCategory,
+                    deadline: convertISOToDate(taskDeadline),
                 },
                 headers: {
                     "Authorization": "Bearer " + token
@@ -142,7 +141,7 @@ export default function TodoList() {
             console.log("res: ", res);
             setEditingTask({});
             fetchIncompleteTasks();
-            // resetForm();
+            resetForm();
         }
     };
 
@@ -154,7 +153,8 @@ export default function TodoList() {
         setTaskCategory('');
     };
 
-
+    console.log("editingTask:", editingTask);
+    console.log("taskname: ", taskName);
 
     return (
         <div className="min-h-screen bg-gray-100 p-4 md:p-8">
@@ -218,36 +218,46 @@ export default function TodoList() {
                                             placeholder="Task Category"
                                             className="w-full p-2 border rounded"
                                         />
-                                        <button onClick={saveEdit} className="py-2 px-4 bg-blue-500 text-white rounded">Save</button>
+
+                                        <div className="buttons flex w-full justify-end gap-4">
+                                            <button onClick={saveEdit} className="py-2 px-4 bg-blue-500 text-white rounded">Save</button>
+                                            <button onClick={() => {
+                                                setEditingTask({})
+                                            }} className="py-2 px-4 bg-red-500 text-white rounded">Cancel</button>
+                                        </div>
                                     </div>
                                 ) : (
-                                    <div className="flex justify-between">
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                checked={task.completed}
-                                                onChange={() => toggleTaskCompletion(task)}
-                                                className="mr-2"
-                                            />
-                                            <span className={`${task.completed ? 'line-through text-gray-500' : ''}`}>{task.name}</span>
+                                    <div className="flex gap-4  justify-between">
+
+                                        {!showCompleted && <input
+                                            type="checkbox"
+                                            checked={task.completed}
+                                            onChange={() => toggleTaskCompletion(task)}
+                                            className="mr-2 h-1/5 mt-4 border-2 border-black "
+                                        />}
+
+                                        <div className="flex flex-col justify-between w-full gap-4">
+
+                                            <span className={`${task.completed ? 'line-through text-gray-500' : '' + `text-3xl font-bold`}`}>{task.name}</span>
+                                            <p className="text-gray-500">{task.description}</p>
+                                            <p className="text-gray-500">Deadline: {convertISOToDate(task.deadline)}</p>
+                                            <p className=" font-semibold text-blue-400">Category: {task.category}</p>
                                         </div>
-                                        <div className="text-sm">
-                                            <p>Deadline: {convertISOToDate(task.deadline)}</p>
-                                            <p>Category: {task.category}</p>
-                                        </div>
+
                                     </div>
                                 )}
                             </div>
 
                             {/* Task action buttons */}
-                            < div className="flex justify-end p-2 bg-gray-50 space-x-2" >
-                                <button onClick={() => startEditing(task)} className="py-1 px-2 bg-yellow-500 text-white rounded">
+                            {!taskName && < div className="flex justify-end p-2 bg-gray-50 space-x-2" >
+                                <button onClick={() => startEditing(task)} className="py-1 px-2 bg-blue-500 text-white rounded">
                                     Edit
                                 </button>
                                 <button onClick={() => deleteTask(task.id)} className="py-1 px-2 bg-red-500 text-white rounded">
                                     Delete
                                 </button>
                             </div>
+                            }
                         </div >
                     ))
                     }

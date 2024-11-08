@@ -197,8 +197,8 @@ export default function ClientProfile() {
     return (
         <>
             {role == "client" &&
-                <div className="min-h-screen bg-gray-400 flex items-center justify-center p-4">
-                    <div className="w-full max-w-2xl bg-gray-200 text-black p-6 rounded-lg shadow-lg">
+                <div className="min-h-screen bg-gray-200 flex items-center justify-center p-4">
+                    <div className="w-full max-w-2xl bg-gray-100 text-black p-6 rounded-lg shadow-lg">
                         <form onSubmit={handleSubmit} className="space-y-4 py-4">
 
 
@@ -213,7 +213,7 @@ export default function ClientProfile() {
                                         placeholder="Enter name"
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
-                                        className="bg-gray-300 border border-gray-600 text-gray-800 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-600 text-gray-800 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -227,7 +227,7 @@ export default function ClientProfile() {
                                         placeholder="Enter surname"
                                         value={surname}
                                         onChange={(e) => setSurname(e.target.value)}
-                                        className="bg-gray-300 border border-gray-300 text-gray-800 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -244,7 +244,7 @@ export default function ClientProfile() {
                                         placeholder="Enter gender"
                                         value={gender}
                                         onChange={(e) => setGender(e.target.value)}
-                                        className="bg-gray-300 border border-gray-600 text-gray-800 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-600 text-gray-800 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -258,7 +258,7 @@ export default function ClientProfile() {
                                         placeholder="Enter age"
                                         value={age}
                                         onChange={(e) => setAge(e.target.value)}
-                                        className="bg-gray-300 border border-gray-100 text-gray-800 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-100 text-gray-800 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -274,7 +274,7 @@ export default function ClientProfile() {
                                     placeholder="Enter phone number"
                                     value={phoneNumber}
                                     onChange={(e) => setSetPhoneNumber(e.target.value)}
-                                    className="bg-gray-300 border border-gray-300 text-gray-800 p-2 rounded-md"
+                                    className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
                                     required
                                 />
                             </div>
@@ -288,7 +288,8 @@ export default function ClientProfile() {
                                     placeholder="Search for a place..."
                                     value={query}
                                     onChange={(e) => handleAddress(e)}
-                                    style={{ width: "100%", padding: "10px", fontSize: "16px" }}
+                                    className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
+                                // style={{ width: "100%", padding: "10px", fontSize: "16px" }}
                                 />
                                 {results.length > 0 && (
                                     <ul
@@ -341,7 +342,7 @@ export default function ClientProfile() {
                                         placeholder="Enter name"
                                         value={formData.name}
                                         onChange={handleInputChange}
-                                        className="bg-gray-300 border border-gray-600 text-gray-100 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -356,7 +357,7 @@ export default function ClientProfile() {
                                         placeholder="Enter surname"
                                         value={formData.surname}
                                         onChange={handleInputChange}
-                                        className="bg-gray-300 border border-gray-600 text-gray-100 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -374,7 +375,7 @@ export default function ClientProfile() {
                                         placeholder="Enter gender"
                                         value={formData.gender}
                                         onChange={handleInputChange}
-                                        className="bg-gray-300 border border-gray-600 text-gray-100 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -389,7 +390,7 @@ export default function ClientProfile() {
                                         placeholder="Enter age"
                                         value={formData.age}
                                         onChange={handleInputChange}
-                                        className="bg-gray-300 border border-gray-600 text-gray-100 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -406,7 +407,7 @@ export default function ClientProfile() {
                                     placeholder="Enter phone number"
                                     value={formData.phoneNumber}
                                     onChange={handleInputChange}
-                                    className="bg-gray-300 border border-gray-600 text-gray-100 p-2 rounded-md"
+                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
                                     required
                                 />
                             </div>
@@ -422,7 +423,7 @@ export default function ClientProfile() {
                                     placeholder="Enter address"
                                     value={formData.address}
                                     onChange={handleInputChange}
-                                    className="bg-gray-300 border border-gray-600 text-gray-100 p-2 rounded-md"
+                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
                                     required
                                 />
                             </div>
@@ -438,7 +439,7 @@ export default function ClientProfile() {
                                     placeholder="Enter highest qualification"
                                     value={formData.highestQualification}
                                     onChange={handleInputChange}
-                                    className="bg-gray-300 border border-gray-600 text-gray-100 p-2 rounded-md"
+                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
                                     required
                                 />
                             </div>
@@ -451,7 +452,7 @@ export default function ClientProfile() {
                                     id="qualificationDocument"
                                     name="qualificationDocument"
                                     type="file"
-                                    className="bg-gray-300 border border-gray-600 text-gray-100 p-2 rounded-md"
+                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
                                     onChange={handleInputChange}
                                     required
                                 />
@@ -468,7 +469,7 @@ export default function ClientProfile() {
                                     placeholder="Enter speciality"
                                     value={formData.speciality}
                                     onChange={handleInputChange}
-                                    className="bg-gray-300 border border-gray-600 text-gray-100 p-2 rounded-md"
+                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
                                     required
                                 />
                             </div>
@@ -484,7 +485,7 @@ export default function ClientProfile() {
                                     placeholder="Enter years of experience"
                                     value={formData.yearsOfExperience}
                                     onChange={handleInputChange}
-                                    className="bg-gray-300 border border-gray-600 text-gray-100 p-2 rounded-md"
+                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
                                     required
                                 />
                             </div>
@@ -516,7 +517,7 @@ export default function ClientProfile() {
                                         placeholder="Enter name"
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
-                                        className="bg-gray-300 border border-gray-600 text-gray-800 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-600 text-gray-800 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -530,7 +531,7 @@ export default function ClientProfile() {
                                         placeholder="Enter surname"
                                         value={surname}
                                         onChange={(e) => setSurname(e.target.value)}
-                                        className="bg-gray-300 border border-gray-300 text-gray-800 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -547,7 +548,7 @@ export default function ClientProfile() {
                                         placeholder="Enter gender"
                                         value={gender}
                                         onChange={(e) => setGender(e.target.value)}
-                                        className="bg-gray-300 border border-gray-600 text-gray-800 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-600 text-gray-800 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -561,7 +562,7 @@ export default function ClientProfile() {
                                         placeholder="Enter age"
                                         value={age}
                                         onChange={(e) => setAge(e.target.value)}
-                                        className="bg-gray-300 border border-gray-100 text-gray-800 p-2 rounded-md"
+                                        className="bg-gray-200 border border-gray-100 text-gray-800 p-2 rounded-md"
                                         required
                                     />
                                 </div>
@@ -577,7 +578,7 @@ export default function ClientProfile() {
                                     placeholder="Enter phone number"
                                     value={phoneNumber}
                                     onChange={(e) => setSetPhoneNumber(e.target.value)}
-                                    className="bg-gray-300 border border-gray-300 text-gray-800 p-2 rounded-md"
+                                    className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
                                     required
                                 />
                             </div>
@@ -591,7 +592,7 @@ export default function ClientProfile() {
                                     placeholder="Enter address"
                                     value={address}
                                     onChange={(e) => setAddress(e.target.value)}
-                                    className="bg-gray-300 border border-gray-300 text-gray-800 p-2 rounded-md"
+                                    className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
                                     required
                                 />
                             </div>

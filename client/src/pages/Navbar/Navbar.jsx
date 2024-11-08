@@ -109,7 +109,7 @@ const Navbar = () => {
                         "Authorization": "Bearer " + token
                     }
                 })
-                console.log("res: ", res);
+                // console.log("res: ", res);
                 setRole(res.data.role);
             } catch (error) {
                 console.log("error in getting user details: ", error);

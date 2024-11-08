@@ -49,7 +49,7 @@ export default function HomePage() {
     ]
 
     return (
-        <div className="min-h-screen bg-gray-100 flex flex-col max-w-screen-sm sm:max-w-full overflow-hidden">
+        <div className="min-h-screen bg-gray-100 flex flex-col justify-between max-w-screen-sm sm:max-w-full overflow-hidden">
 
 
             <main className="flex-grow">
@@ -88,12 +88,12 @@ export default function HomePage() {
                 </section>
 
                 {/* Services Blocks */}
-                <div className="container mx-auto py-20 px-4">
+                <div className="w-full py-20 px-20  bg-white">
                     <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Our Comprehensive Elder Care Services</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {services.map((service, index) => (
-                            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 hover:shadow-xl transform hover:-translate-y-1 min-h-[400px] ">
-                                <div className="pt-6 pb-3 px-3 flex flex-col justify-between h-full">
+                            <div key={index} className="bg-slate-100 rounded-lg shadow-xl overflow-hidden transition duration-300 hover:shadow-xl transform hover:-translate-y-1 min-h-[400px] ">
+                                <div className="p-3 gap-3 flex flex-col justify-between h-full">
                                     <img
                                         src={service.image}
                                         alt={service.title}
@@ -101,9 +101,10 @@ export default function HomePage() {
                                         height={300}
                                         className="rounded-lg w-full object-cover"
                                     />
+
                                     <div>
 
-                                        <div className="flex items-center mb-4">
+                                        <div className="flex items-center mb-3">
                                             <service.icon className="w-8 h-8 text-blue-600 mr-3" />
                                             <h3 className="text-xl font-semibold">{service.title}</h3>
                                         </div>
@@ -165,9 +166,11 @@ export default function HomePage() {
                     </div>
                 </div>
             </main>
+            <Chatbot />
+            <Sos />
 
             {/* Footer */}
-            <footer className="bg-gray-800 text-white py-8 ">
+            <footer className="bg-gray-800 text-white py-8 bottom-0">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <div className="mb-4 md:mb-0">
@@ -185,8 +188,6 @@ export default function HomePage() {
                     </div>
                 </div>
             </footer>
-            <Chatbot />
-            <Sos />
             {/* <SOSNotification /> */}
         </div >
     )

@@ -49,7 +49,7 @@ export default function Sos() {
         <>
             {role == "client" &&
 
-                <div className="min-h-screen relative bg-gray-100">
+                <div className="relative bg-gray-100">
                     {/* Main content area */}
                     {/* <div className="p-4">
                         <h1 className="text-2xl font-bold mb-4 text-gray-800">Emergency Response System</h1>

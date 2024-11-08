@@ -133,7 +133,7 @@ export default function Chatbot() {
 
 
     return (
-        <div className="absolute bottom bottom-1 right-0 z-99999">
+        <div className="absolute right-0 z-99999">
             <button
                 onClick={() => setIsOpen(!isOpen)} // Toggle chatbot visibility
                 className="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-400 rounded-lg px-4 py-2 text-white"
