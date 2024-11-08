@@ -61,6 +61,7 @@ const { validateWebhookSignature } = require('razorpay/dist/utils/razorpay-utils
 
 const app = express();
 
+
 // Twilio setup
 const accountSid = process.env.TWILIO_ACCOUT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN; 
@@ -76,6 +77,13 @@ app.use("/api/user", authMiddleware, userRoutes);
 
 // Serve static files
 app.use(express.static(path.join(__dirname)));
+app.use('/static', express.static(path.join(__dirname, 'public'), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'text/javascript');
+    }
+  }
+}));
 
 // Razorpay instance initialization
 const razorpay = new Razorpay({
