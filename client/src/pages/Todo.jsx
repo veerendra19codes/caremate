@@ -162,8 +162,8 @@ export default function TodoList() {
 
                 {/* Toggle between active and completed tasks */}
                 <div className="bg-white shadow-lg rounded-lg p-4">
-                    <div className="flex justify-between">
-                        <div>
+                    <div className="flex justify-between items-center">
+                        <div className="flex gap-4">
                             <button
                                 onClick={() => setShowCompleted(false)}
                                 className={`py - 2 px-4 rounded-md ${!showCompleted ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}

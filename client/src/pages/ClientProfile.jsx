@@ -1,609 +1,196 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react'
+import { Toaster, toast } from 'react-hot-toast'
 
-export default function ClientProfile() {
-    const [query, setQuery] = useState("");
-    const [results, setResults] = useState([]);
-    const [location, setLocation] = useState({ lat: null, lon: null });
+// Sample initial data
+const initialProfile = {
+    username: "elder_john",
+    name: "John Doe",
+    phoneNumber: "5551234567",
+    address: "123 Elder St",
+    city: "Safetown",
+    profileImage: "/placeholder.svg?height=100&width=100",
+    guardian: {
+        name: "Jane Smith",
+        phoneNumber: "5559876543",
+        address: "456 Guardian Ave",
+        city: "Careville",
+        profileImage: "/placeholder.svg?height=100&width=100"
+    }
+}
 
-    const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
-    const [gender, setGender] = useState("");
-    const [age, setAge] = useState("");
-    const [phoneNumber, setSetPhoneNumber] = useState("");
-    const [address, setAddress] = useState("");
-    const [role, setRole] = useState("");
+export default function ElderlyProfile() {
+    const [profile, setProfile] = useState(initialProfile)
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    const validateForm = (formData) => {
+        const errors = []
 
-        try {
-            const apiUrl = import.meta.env.VITE_BACKEND_URL;
-
-            const token = localStorage.getItem("usertoken");
-            console.log("locaiton:", location);
-
-            const res = await axios({
-                url: `${apiUrl}/api/user/profile/client`,
-                method: "PUT",
-                data: {
-                    name,
-                    surname,
-                    gender,
-                    age,
-                    phoneNumber,
-                    address,
-                    lat: location.lat,
-                    lon: location.lon
-                },
-                headers: {
-                    "Authorization": "Bearer " + token,
-                }
-            })
-            console.log("res: ", res);
-        } catch (error) {
-            console.log("error in submitting: ", error);
-        }
-    };
-
-    // Fetch suggestions from Nominatim based on query
-    const fetchSuggestions = async (searchTerm) => {
-        try {
-            const response = await axios.get("https://nominatim.openstreetmap.org/search", {
-                params: {
-                    q: searchTerm,
-                    format: "json",
-                    addressdetails: 1,
-                    limit: 5,
-                },
-            });
-            setResults(response.data);
-        } catch (error) {
-            console.error("Error fetching suggestions:", error);
-        }
-    };
-
-    // Handle input changes to search
-    const handleAddress = (e) => {
-        const searchTerm = e.target.value;
-        setQuery(searchTerm);
-
-        if (searchTerm.length > 2) {
-            fetchSuggestions(searchTerm);
-        } else {
-            setResults([]);
-        }
-    };
-
-
-    // Handle place selection and show lat/lon
-    const handlePlaceSelect = (place) => {
-        setLocation({ lat: place.lat, lon: place.lon });
-        setQuery(`${place.display_name}`);
-        setResults([]); // Clear results after selecting
-    };
-
-
-    useEffect(() => {
-        const token = localStorage.getItem("usertoken");
-
-        const getUserDetails = async () => {
-            try {
-                const apiUrl = `${import.meta.env.VITE_BACKEND_URL}/api/user`;
-
-                const res = await axios({
-                    url: apiUrl,
-                    method: "GET",
-                    headers: {
-                        "Authorization": "Bearer " + token
-                    }
-                })
-                console.log("res: ", res);
-                setRole(res.data.role);
-            } catch (error) {
-                console.log("error in getting user details: ", error);
+        // Check for empty fields
+        for (let [key, value] of formData.entries()) {
+            if (!value.trim()) {
+                errors.push(`${key.charAt(0).toUpperCase() + key.slice(1)} cannot be empty`)
             }
         }
-        getUserDetails();
-    }, [])
 
-    console.log("role: ", role);
-
-
-
-    // health expert
-    const [formData, setFormData] = useState({
-        name: '',
-        surname: '',
-        gender: '',
-        age: '',
-        phoneNumber: '',
-        address: '',
-        highestQualification: '',
-        qualificationDocument: null,
-        speciality: '',
-        yearsOfExperience: ''
-    });
-    const [profileImage, setProfileImage] = useState(null);
-
-    const handleInputChange = (e) => {
-        const { name, value, files } = e.target;
-        if (name === 'qualificationDocument' && files) {
-            setFormData({ ...formData, [name]: files[0] });
-        } else {
-            setFormData({ ...formData, [name]: value });
+        // Validate phone numbers
+        const phoneRegex = /^\d{10}$/
+        if (!phoneRegex.test(formData.get('phoneNumber'))) {
+            errors.push('Phone number must be 10 digits')
         }
-    };
-
-    const handleSubmitHealth = (e) => {
-        e.preventDefault();
-        console.log('Form data:', formData);
-        console.log('Profile image:', profileImage);
-        alert("Form Submitted: Your professional information has been successfully submitted.");
-    };
-
-
-    const handleSubmitCareTaker = async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData();
-
-        formData.append('name', name);
-        formData.append('surname', surname);
-        formData.append('phoneNumber', phoneNumber);
-        formData.append('gender', gender);
-        formData.append('age', age);
-        formData.append('address', address);
-
-
-        if (file) {
-            formData.append('photo', file);
-            // setFormData.photo = file,
+        if (!phoneRegex.test(formData.get('guardianPhoneNumber'))) {
+            errors.push('Guardian phone number must be 10 digits')
         }
 
-        console.log("FormDataFields: ", formData);
-
-        // alert('Form Submitted: Your form has been successfully submitted.');
-
-        try {
-            const apiUrl = import.meta.env.VITE_BACKEND_URL;
-
-            const token = localStorage.getItem("usertoken");
-
-            const res = await axios({
-                url: `${apiUrl}/api/user/profile/client`,
-                method: "POST",
-                data: {
-                    name,
-                    surname,
-                    gender,
-                    age,
-                    phoneNumber,
-                    address,
-                    lat: location.lat,
-                    lon: location.lon
-                },
-                headers: {
-                    "Authorization": "Bearer " + token,
-                }
-            })
-            console.log("res: ", res);
-        } catch (error) {
-            console.log("error in submitting: ", error);
+        // Validate username
+        const usernameRegex = /^[a-zA-Z0-9_.]{3,15}$/
+        if (!usernameRegex.test(formData.get('username'))) {
+            errors.push('Username must be 3-15 characters and can only include letters, numbers, underscores, and periods')
         }
-    };
 
+        return errors
+    }
+
+    const handleEditSubmit = (event) => {
+        event.preventDefault()
+        const formData = new FormData(event.target)
+        const errors = validateForm(formData)
+
+        if (errors.length > 0) {
+            errors.forEach(error => toast.error(error))
+            return
+        }
+
+        setProfile(prevProfile => ({
+            ...prevProfile,
+            username: formData.get('username'),
+            name: formData.get('name'),
+            phoneNumber: formData.get('phoneNumber'),
+            address: formData.get('address'),
+            city: formData.get('city'),
+            guardian: {
+                ...prevProfile.guardian,
+                name: formData.get('guardianName'),
+                phoneNumber: formData.get('guardianPhoneNumber'),
+                address: formData.get('guardianAddress'),
+                city: formData.get('guardianCity'),
+            }
+        }))
+        setIsDialogOpen(false)
+        toast.success('Profile updated successfully')
+    }
 
     return (
-        <>
-            {role == "client" &&
-                <div className="min-h-screen bg-gray-200 flex items-center justify-center p-4">
-                    <div className="w-full max-w-2xl bg-gray-100 text-black p-6 rounded-lg shadow-lg">
-                        <form onSubmit={handleSubmit} className="space-y-4 py-4">
-
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="name" className="text-gray-800">
-                                        Name <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Enter name"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        className="bg-gray-200 border border-gray-600 text-gray-800 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="surname" className="text-gray-800">
-                                        Surname <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="surname"
-                                        placeholder="Enter surname"
-                                        value={surname}
-                                        onChange={(e) => setSurname(e.target.value)}
-                                        className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
+        <div className="container mx-auto p-4 lg:px-[20%] xl:px-[30%]">
+            <Toaster position="top-right" />
+            <div className="bg-white shadow rounded-lg mb-6">
+                <div className="p-4">
+                    <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center space-x-4">
+                            <img src={profile.profileImage} alt={profile.name} className="h-20 w-20 rounded-full" />
+                            <div>
+                                <h2 className="text-xl font-semibold">{profile.name}</h2>
+                                <p className="text-sm text-gray-500">@{profile.username}</p>
                             </div>
+                        </div>
+                        <button
+                            onClick={() => setIsDialogOpen(true)}
+                            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300"
+                        >
+                            Edit Profile
+                        </button>
+                    </div>
+                    <div className="space-y-2">
+                        <div className="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                            </svg>
+                            <span>{profile.phoneNumber}</span>
+                        </div>
+                        <div className="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                            </svg>
+                            <span>{profile.address}, {profile.city}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="gender" className="text-gray-800">
-                                        Gender <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="gender"
-                                        placeholder="Enter gender"
-                                        value={gender}
-                                        onChange={(e) => setGender(e.target.value)}
-                                        className="bg-gray-200 border border-gray-600 text-gray-800 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="age" className="text-gray-800">
-                                        Age <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name="age"
-                                        placeholder="Enter age"
-                                        value={age}
-                                        onChange={(e) => setAge(e.target.value)}
-                                        className="bg-gray-200 border border-gray-100 text-gray-800 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
+            <div className="bg-white shadow rounded-lg mb-6">
+                <div className="p-4">
+                    <h3 className="text-xl font-bold mb-4">Guardian Information</h3>
+                    <div className="flex items-center space-x-4 mb-4">
+                        <img src={profile.guardian.profileImage} alt={profile.guardian.name} className="h-16 w-16 rounded-full" />
+                        <div>
+                            <h4 className="text-lg font-semibold">{profile.guardian.name}</h4>
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <div className="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                            </svg>
+                            <span>{profile.guardian.phoneNumber}</span>
+                        </div>
+                        <div className="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                            </svg>
+                            <span>{profile.guardian.address}, {profile.guardian.city}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {isDialogOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-md">
+                        <h2 className="text-xl font-bold mb-4">Edit Profile</h2>
+                        <form onSubmit={handleEditSubmit} className="space-y-4 h-[500px] overflow-y-auto px-2">
+                            <div>
+                                <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+                                <input type="text" id="username" name="username" defaultValue={profile.username} className="mt-1 w-full rounded-md border-[2px]  border-gray-300 shadow-sm p-2" />
                             </div>
-
-                            <div className="flex flex-col space-y-1.5">
-                                <label htmlFor="phoneNumber" className="text-gray-800">
-                                    Phone Number <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="phoneNumber"
-                                    placeholder="Enter phone number"
-                                    value={phoneNumber}
-                                    onChange={(e) => setSetPhoneNumber(e.target.value)}
-                                    className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
-                                    required
-                                />
+                            <div>
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                                <input type="text" id="name" name="name" defaultValue={profile.name} className="mt-1 block w-full rounded-md shadow-sm border-[2px]  border-gray-300 p-2" />
                             </div>
-                            <div className="flex flex-col space-y-1.5">
-                                <label htmlFor="address" className="text-gray-800">
-                                    Address <span className="text-red-500">*</span>
-                                </label>
-
-                                <input
-                                    type="text"
-                                    placeholder="Search for a place..."
-                                    value={query}
-                                    onChange={(e) => handleAddress(e)}
-                                    className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
-                                // style={{ width: "100%", padding: "10px", fontSize: "16px" }}
-                                />
-                                {results.length > 0 && (
-                                    <ul
-                                        style={{
-                                            border: "1px solid #ccc",
-                                            listStyle: "none",
-                                            padding: "10px",
-                                            maxHeight: "200px",
-                                            overflowY: "auto",
-                                        }}
-                                    >
-                                        {results.map((result) => (
-                                            <li
-                                                key={result.place_id}
-                                                style={{ cursor: "pointer", padding: "5px 0" }}
-                                                onClick={() => handlePlaceSelect(result)}
-                                            >
-                                                {result.display_name}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-
-
-
+                            <div>
+                                <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">Phone Number</label>
+                                <input type="tel" id="phoneNumber" name="phoneNumber" defaultValue={profile.phoneNumber} className="mt-1 block w-full rounded-md shadow-sm border-[2px]  border-gray-300 p-2" />
                             </div>
-
-                            <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md">
-                                Submit
-                            </button>
+                            <div>
+                                <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address</label>
+                                <input type="text" id="address" name="address" defaultValue={profile.address} className="mt-1 block w-full shadow-sm rounded-md border-[2px]  border-gray-300 p-2" />
+                            </div>
+                            <div>
+                                <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
+                                <input type="text" id="city" name="city" defaultValue={profile.city} className="mt-1 block w-full rounded-md shadow-sm border-[2px]  border-gray-300 p-2" />
+                            </div>
+                            <div>
+                                <label htmlFor="guardianName" className="block text-sm font-medium text-gray-700">Guardian Name</label>
+                                <input type="text" id="guardianName" name="guardianName" defaultValue={profile.guardian.name} className="mt-1 block w-full rounded-md shadow-sm border-[2px]  border-gray-300 p-2" />
+                            </div>
+                            <div>
+                                <label htmlFor="guardianPhoneNumber" className="block text-sm font-medium text-gray-700">Guardian Phone Number</label>
+                                <input type="tel" id="guardianPhoneNumber" name="guardianPhoneNumber" defaultValue={profile.guardian.phoneNumber} className="mt-1 block w-full rounded-md shadow-sm border-[2px]  border-gray-300 p-2" />
+                            </div>
+                            <div>
+                                <label htmlFor="guardianAddress" className="block text-sm font-medium text-gray-700">Guardian Address</label>
+                                <input type="text" id="guardianAddress" name="guardianAddress" defaultValue={profile.guardian.address} className="mt-1 block w-full rounded-md shadow-sm border-[2px]  border-gray-300 p-2" />
+                            </div>
+                            <div>
+                                <label htmlFor="guardianCity" className="block text-sm font-medium text-gray-700">Guardian City</label>
+                                <input type="text" id="guardianCity" name="guardianCity" defaultValue={profile.guardian.city} className="mt-1 block w-full rounded-md shadow-sm border-[2px]  border-gray-300 p-2" />
+                            </div>
+                            <div className="flex justify-end space-x-2">
+                                <button type="button" onClick={() => setIsDialogOpen(false)} className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition duration-300">Cancel</button>
+                                <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300">Save changes</button>
+                            </div>
                         </form>
                     </div>
                 </div>
-            }
-
-            {role == "health expert" &&
-                <div className="min-h-screen bg-gray-400 flex items-center justify-center p-4">
-                    <div className="w-full max-w-2xl bg-gray-200 text-gray-100 p-6 rounded-lg shadow-lg">
-                        <form onSubmit={handleSubmitHealth} className="space-y-4 py-8">
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="name" className="text-black">
-                                        Name <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        id="name"
-                                        name="name"
-                                        type="text"
-                                        placeholder="Enter name"
-                                        value={formData.name}
-                                        onChange={handleInputChange}
-                                        className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="surname" className="text-black">
-                                        Surname <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        id="surname"
-                                        name="surname"
-                                        type="text"
-                                        placeholder="Enter surname"
-                                        value={formData.surname}
-                                        onChange={handleInputChange}
-                                        className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="gender" className="text-black">
-                                        Gender <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        id="gender"
-                                        name="gender"
-                                        type="text"
-                                        placeholder="Enter gender"
-                                        value={formData.gender}
-                                        onChange={handleInputChange}
-                                        className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="age" className="text-black">
-                                        Age <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        id="age"
-                                        name="age"
-                                        type="number"
-                                        placeholder="Enter age"
-                                        value={formData.age}
-                                        onChange={handleInputChange}
-                                        className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col space-y-1.5">
-                                <label htmlFor="phoneNumber" className="text-black">
-                                    Phone Number <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    id="phoneNumber"
-                                    name="phoneNumber"
-                                    type="text"
-                                    placeholder="Enter phone number"
-                                    value={formData.phoneNumber}
-                                    onChange={handleInputChange}
-                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
-                                    required
-                                />
-                            </div>
-
-                            <div className="flex flex-col space-y-1.5">
-                                <label htmlFor="address" className="text-black">
-                                    Address <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    id="address"
-                                    name="address"
-                                    type="text"
-                                    placeholder="Enter address"
-                                    value={formData.address}
-                                    onChange={handleInputChange}
-                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
-                                    required
-                                />
-                            </div>
-
-                            <div className="flex flex-col space-y-1.5">
-                                <label htmlFor="highestQualification" className="text-black">
-                                    Highest Qualification <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    id="highestQualification"
-                                    name="highestQualification"
-                                    type="text"
-                                    placeholder="Enter highest qualification"
-                                    value={formData.highestQualification}
-                                    onChange={handleInputChange}
-                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
-                                    required
-                                />
-                            </div>
-
-                            <div className="flex flex-col space-y-1.5">
-                                <label htmlFor="qualificationDocument" className="text-black">
-                                    Qualification Related Document <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    id="qualificationDocument"
-                                    name="qualificationDocument"
-                                    type="file"
-                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </div>
-
-                            <div className="flex flex-col space-y-1.5">
-                                <label htmlFor="speciality" className="text-black">
-                                    Speciality <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    id="speciality"
-                                    name="speciality"
-                                    type="text"
-                                    placeholder="Enter speciality"
-                                    value={formData.speciality}
-                                    onChange={handleInputChange}
-                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
-                                    required
-                                />
-                            </div>
-
-                            <div className="flex flex-col space-y-1.5">
-                                <label htmlFor="yearsOfExperience" className="text-black">
-                                    Years of Experience <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    id="yearsOfExperience"
-                                    name="yearsOfExperience"
-                                    type="number"
-                                    placeholder="Enter years of experience"
-                                    value={formData.yearsOfExperience}
-                                    onChange={handleInputChange}
-                                    className="bg-gray-200 border border-gray-600 text-gray-100 p-2 rounded-md"
-                                    required
-                                />
-                            </div>
-
-                            <button
-                                type="submit"
-                                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md"
-                            >
-                                Submit
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            }
-
-            {role == "caretaker" &&
-                <div className="min-h-screen bg-gray-400 flex items-center justify-center p-4">
-                    <div className="w-full max-w-2xl bg-gray-200 text-black p-6 rounded-lg shadow-lg">
-                        <form onSubmit={handleSubmitCareTaker} className="space-y-4 py-4">
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="name" className="text-gray-800">
-                                        Name <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Enter name"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        className="bg-gray-200 border border-gray-600 text-gray-800 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="surname" className="text-gray-800">
-                                        Surname <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="surname"
-                                        placeholder="Enter surname"
-                                        value={surname}
-                                        onChange={(e) => setSurname(e.target.value)}
-                                        className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="gender" className="text-gray-800">
-                                        Gender <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="gender"
-                                        placeholder="Enter gender"
-                                        value={gender}
-                                        onChange={(e) => setGender(e.target.value)}
-                                        className="bg-gray-200 border border-gray-600 text-gray-800 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
-                                <div className="flex flex-col space-y-1.5">
-                                    <label htmlFor="age" className="text-gray-800">
-                                        Age <span className="text-red-500">*</span>
-                                    </label>
-                                    <input
-                                        type="number"
-                                        name="age"
-                                        placeholder="Enter age"
-                                        value={age}
-                                        onChange={(e) => setAge(e.target.value)}
-                                        className="bg-gray-200 border border-gray-100 text-gray-800 p-2 rounded-md"
-                                        required
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col space-y-1.5">
-                                <label htmlFor="phoneNumber" className="text-gray-800">
-                                    Phone Number <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="phoneNumber"
-                                    placeholder="Enter phone number"
-                                    value={phoneNumber}
-                                    onChange={(e) => setSetPhoneNumber(e.target.value)}
-                                    className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
-                                    required
-                                />
-                            </div>
-                            <div className="flex flex-col space-y-1.5">
-                                <label htmlFor="address" className="text-gray-800">
-                                    Address <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="address"
-                                    placeholder="Enter address"
-                                    value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
-                                    className="bg-gray-200 border border-gray-300 text-gray-800 p-2 rounded-md"
-                                    required
-                                />
-                            </div>
-
-                            <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md">
-                                Submit
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            }
-        </>
-    );
+            )}
+        </div>
+    )
 }

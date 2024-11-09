@@ -54,7 +54,7 @@ export default function HomePage() {
 
             <main className="flex-grow">
                 {/* Hero Section */}
-                <section className="w-full py-12 md:py-24 lg:py-32 xl:py-24 bg-gray-100">
+                <section className="w-full xl:px-24 md:py-24 lg:py-32 xl:py-24 bg-white">
                     <div className="container mx-auto px-4 md:px-6">
                         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
                             <div className="flex flex-col justify-center space-y-4">
@@ -88,7 +88,7 @@ export default function HomePage() {
                 </section>
 
                 {/* Services Blocks */}
-                <div className="w-full py-20 px-20  bg-white">
+                <div className="w-full py-20 px-20  bg-gray-200">
                     <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Our Comprehensive Elder Care Services</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {services.map((service, index) => (
@@ -146,7 +146,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Testimonial Section */}
-                <div className="bg-gray-100 py-20">
+                <div className="bg-gray-200 py-20">
                     <div className="container mx-auto px-4">
                         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">What Our Clients Say</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
