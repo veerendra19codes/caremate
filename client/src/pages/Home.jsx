@@ -170,7 +170,7 @@ export default function HomePage() {
             <Sos />
 
             {/* Footer */}
-            <footer className="bg-gray-800 text-white py-8 bottom-0">
+            <footer className="bg-blue-900 text-white py-8 bottom-0">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <div className="mb-4 md:mb-0">

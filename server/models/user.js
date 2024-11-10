@@ -30,6 +30,9 @@ const taskSchema = new mongoose.Schema({
 }, { timestamps: true }); 
 
 const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+    },
     username: {
         type: String,
         required: true,
@@ -56,6 +59,9 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String,
     },
+    city: {
+        type: String,
+    },
     gender: {
         type: String
     },
@@ -71,6 +77,18 @@ const userSchema = new mongoose.Schema({
     },
     profileImageUrl: {
         type: String
+    },
+    guardianName: {
+        type:String,
+    },
+    guardianPhoneNumber: {
+        type: String,
+    },
+    guardianAddress: {
+        type: String,
+    },
+    guardianCity: {
+        type: String,
     }
 }, { timestamps: true });
 

@@ -46,42 +46,40 @@ const router = express.Router();
 // });
 
 router.put("/profile/client", async (req, res) => {
+    console.log("hello in put")
     
-    const {name,surname,
-                gender,
-                    age,
-                    phoneNumber,
-                    address,
-                    lat,
-                    lon} =  req.body; // Extracting fields to update
+    const {name, phoneNumber, address, city, guardianName, guardianPhoneNumber, guardianAddress, guardianCity} =  req.body; // Extracting fields to update
     const profileImageUrl = getRandomProfileImageUrl();
     
     console.log("name: ", name);
-    try {
-        // Find the user by ID and update the fields
-        const updatedUser = await User.findOneAndUpdate({firstName:name}, {
-            surname,
-            gender,
-            age,
-            phoneNumber,
-            address,
-            profileImageUrl, 
-            lat,
-            lon
-            // Update the profile image URL from your libs folder
-        }); // Return the updated user
+    console.log("body:", req.body);
+    // try {
+    //     // Find the user by ID and update the fields
+    //     const updatedUser = await User.findOneAndUpdate({firstName:name}, {
+    //         surname,
+    //         gender,
+    //         age,
+    //         phoneNumber,
+    //         address,
+    //         profileImageUrl, 
+    //         lat,
+    //         lon
+    //         // Update the profile image URL from your libs folder
+    //     }); // Return the updated user
 
-        if (!updatedUser) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        console.log("updateduser: ", updatedUser);
+    //     if (!updatedUser) {
+    //         return res.status(404).json({ message: 'User not found' });
+    //     }
+    //     console.log("updateduser: ", updatedUser);
 
-        // Send the updated user details in the response
-        res.status(200).json({ message: 'User updated successfully', user: updatedUser });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server error', error: error.message });
-    }
+    //     // Send the updated user details in the response
+    //     res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+    // } catch (error) {
+    //     console.error(error);
+    //     res.status(500).json({ message: 'Server error', error: error.message });
+    // }
+
+    return res.status(200).json({message:"updated successfully"})
 });
 
 
