@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa6";
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -26,6 +27,10 @@ const Login = () => {
             });
 
             console.log("res:", res);
+
+            if (res.status != 200) {
+                toast.error(res.data.message);
+            }
             localStorage.setItem("usertoken", res.data.token);
             navigate("/");
         } catch (error) {
@@ -66,11 +71,12 @@ const Login = () => {
                     </div>
                 </div>
 
-                <button type='submit' className='bg-blue-500 hover:bg-blue-500 rounded-lg px-4 py-2 cursor-pointer text-black w-[80%] mt-6 text-white'>
+                <button type='submit' className='bg-blue-500 hover:bg-blue-500 rounded-lg px-4 py-2 cursor-pointer text-black w-[80%] mt-6 '>
                     Login
                 </button>
 
                 <div className="w-full text-black text-center">Don&apos;t have an account? <a href='/register' className='text-blue-500 hover:text-blue-400'>Register</a></div>
+                <Toaster />
             </form >
         </div >
     )

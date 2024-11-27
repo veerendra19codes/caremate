@@ -20,8 +20,8 @@ const fs = require('fs');
 //     cors: true,
 // });
 
-const emailToSocketIdMap = new Map();
-const socketIdToEmailMap = new Map();
+// const emailToSocketIdMap = new Map();
+// const socketIdToEmailMap = new Map();
 
 // io.on("connection", (socket) => {
 //     console.log(`Socket connected:`, socket.id);

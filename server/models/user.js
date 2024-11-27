@@ -63,9 +63,9 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
     gender: {
-        type: String
+        type: String,
     },
-    caretaker: {
+    caretakerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
@@ -82,7 +82,7 @@ const userSchema = new mongoose.Schema({
         type:String,
     },
     guardianPhoneNumber: {
-        type: String,
+        type: Number,
     },
     guardianAddress: {
         type: String,

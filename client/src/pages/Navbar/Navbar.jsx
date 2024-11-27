@@ -238,16 +238,16 @@ export default function Navbar() {
             name: "Profile",
             path: "/profile",
         },
-        {
-            id: 4,
-            name: "Health",
-            path: "/health",
-        },
-        {
-            id: 5,
-            name: "Food",
-            path: "/food",
-        },
+        // {
+        //     id: 4,
+        //     name: "Health",
+        //     path: "/health",
+        // },
+        // {
+        //     id: 5,
+        //     name: "Food",
+        //     path: "/food",
+        // },
         {
             id: 6,
             name: "Caretaker",
@@ -269,7 +269,7 @@ export default function Navbar() {
         {
             id: 3,
             name: "Profile",
-            path: "/profile",
+            path: "/caretaker-profile",
         },
         {
             id: 4,
@@ -371,7 +371,7 @@ export default function Navbar() {
                     <Link
                         key={item.name}
                         to={item.path}
-                        className={`text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white ${mobile ? 'block py-2' : 'text-lg font-medium'
+                        className={`text-gray-200 hover:text-white dark:text-gray-200 dark:hover:text-white ${mobile ? 'block py-2' : 'text-lg font-medium'
                             }`}
                         onClick={mobile ? closeSidebar : undefined}
                     >

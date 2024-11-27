@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa6";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -30,10 +31,15 @@ const Register = () => {
             });
 
             console.log("res:", res);
+
+            if (res.status != 200) {
+                toast.error(res.data.message);
+            }
             localStorage.setItem("usertoken", res.data.token);
             navigate("/");
         } catch (error) {
             console.log("error:", error);
+            toast.error("user with this username or phonenumber already exists");
         }
     }
 
@@ -92,6 +98,8 @@ const Register = () => {
                 </button>
 
                 <div className="w-full text-black text-center">Already have an account? <a href='/login' className='text-blue-500 hover:text-blue-400'>Login</a></div>
+
+                <Toaster />
             </form >
         </div >
     )
